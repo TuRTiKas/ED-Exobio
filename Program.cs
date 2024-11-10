@@ -25,11 +25,13 @@ namespace ED_Exobio
 
         static private bool[] matching = new bool[125];
 
+        static public int number_of_biology = 0;
+
         static public void Init()
         {
             //Мусорный участок кода. Отсюда начинается заполнение информации
             ////////////////////////////////////////////////////////////////////////
-            int number_of_biology = 0;
+            //int number_of_biology = 0;
             info_of_biology_name[number_of_biology] = "Фонтикула Fluctus";
 
             //0 - Зависимость от типа планеты, 1 - зависимость от атмосферы; 1 - Кол-во возможных
@@ -547,21 +549,19 @@ namespace ED_Exobio
             info_of_biology_temperature[number_of_biology, 0, 0] = 50.2;
             info_of_biology_temperature[number_of_biology, 0, 1] = 80.8;
             info_of_biology_temperature[number_of_biology, 1, 0] = 43.6;
-            info_of_biology_temperature[number_of_biology, 1, 1] = 80.8;
-            info_of_biology_temperature[number_of_biology, 2, 0] = 43.6;
-            info_of_biology_temperature[number_of_biology, 2, 1] = 146.5;
-            info_of_biology_temperature[number_of_biology, 3, 0] = 50;
-            info_of_biology_temperature[number_of_biology, 3, 1] = 81.8;
-            info_of_biology_gravity[number_of_biology, 0, 0] = 47.6;
-            info_of_biology_gravity[number_of_biology, 0, 1] = 149;
-            info_of_biology_gravity[number_of_biology, 1, 0] = 0.231;
-            info_of_biology_gravity[number_of_biology, 1, 1] = 0.430;
-            info_of_biology_gravity[number_of_biology, 2, 0] = 0.128;
-            info_of_biology_gravity[number_of_biology, 2, 1] = 0.52;
-            info_of_biology_gravity[number_of_biology, 3, 0] = 0.19;
-            info_of_biology_gravity[number_of_biology, 3, 1] = 0.402;
-            info_of_biology_gravity[number_of_biology, 4, 0] = 0.265;
-            info_of_biology_gravity[number_of_biology, 4, 1] = 0.591;
+            info_of_biology_temperature[number_of_biology, 1, 1] = 146.5;
+            info_of_biology_temperature[number_of_biology, 2, 0] = 50;
+            info_of_biology_temperature[number_of_biology, 2, 1] = 81.8;
+            info_of_biology_temperature[number_of_biology, 3, 0] = 47.6;
+            info_of_biology_temperature[number_of_biology, 3, 1] = 149;
+            info_of_biology_gravity[number_of_biology, 0, 0] = 0.231;
+            info_of_biology_gravity[number_of_biology, 0, 1] = 0.430;
+            info_of_biology_gravity[number_of_biology, 1, 0] = 0.128;
+            info_of_biology_gravity[number_of_biology, 1, 1] = 0.52;
+            info_of_biology_gravity[number_of_biology, 2, 0] = 0.19;
+            info_of_biology_gravity[number_of_biology, 2, 1] = 0.402;
+            info_of_biology_gravity[number_of_biology, 3, 0] = 0.265;
+            info_of_biology_gravity[number_of_biology, 3, 1] = 0.591;
             info_of_biology_cost[number_of_biology, 0] = 8418000;
             info_of_biology_cost[number_of_biology, 1] = 33672000;
             number_of_biology++;
@@ -592,8 +592,28 @@ namespace ED_Exobio
         {
             type_of_planet = type;
             atmosphere = atmo;
-            temperature = Convert.ToDouble(temp);
-            gravity = Convert.ToDouble(grav);
+            temperature = temp;
+            gravity = grav;
+        }
+
+        static public void get_value_type_of_planet(string type)
+        {
+            type_of_planet = type;
+        }
+
+        static public void get_value_type_of_atmosphere(string atmo)
+        {
+            atmosphere = atmo;
+        }
+
+        static public void get_value_temperature(double temp)
+        {
+            temperature = temp;
+        }
+
+        static public void get_value_gravity(double grav)
+        {
+            gravity = grav;
         }
 
         static public void new_search()
@@ -608,7 +628,6 @@ namespace ED_Exobio
         {
             int x1 = 0;
             int x2 = 0;
-            bool succes = true;
             do
             {
                 if (type_of_planet == info_of_biology_type_of_planet[i, x1])
@@ -621,23 +640,17 @@ namespace ED_Exobio
                             {
                                 if ((info_of_biology_gravity[i, x2, 0] <= gravity && info_of_biology_gravity[i, x2, 1] >= gravity && info_of_biology_support[i, 1, 0] > 0) || (info_of_biology_gravity[i, x1, 0] <= gravity && info_of_biology_gravity[i, x1, 1] >= gravity && info_of_biology_support[i, 0, 0] > 0))
                                 {
-                                    succes = true;
                                     matching[i] = true;
                                 }
-                                else succes = false;
                             }
                             else if (info_of_biology_support[i, 0, 0] == 0 && info_of_biology_support[i, 1, 0] == 0 && (info_of_biology_temperature[i, 0, 0] <= temperature && info_of_biology_temperature[i, 0, 1] >= temperature)&& info_of_biology_gravity[i, 0, 0] <= gravity && info_of_biology_gravity[i, 0, 1] >= gravity)
                             {
-                                succes = true;
                                 matching[i] = true;
                             }
-                            else succes = false;
                         }
-                        else succes = false;
                         x2++;
                     } while (x2 < info_of_biology_support[i, 1, 1]);
                 }
-                else succes = false;
                 x1++;
                 x2 = 0;
             } while (x1 < info_of_biology_support[i, 0, 1]);
@@ -645,14 +658,14 @@ namespace ED_Exobio
 
 static public string output(int i)
         {
-            string output_text = "\nНазвание вида: " + Convert.ToString(info_of_biology_name[i]);
+            string output_text = "Название вида: " + Convert.ToString(info_of_biology_name[i]);
             int supscore = 0;
             output_text = output_text + "\nТипы планет: ";
             do
             {
                 output_text = output_text + "\n" + info_of_biology_type_of_planet[i, supscore];
                 supscore++;
-            } while (supscore < info_of_biology_support[i,1,0]);
+            } while (supscore < info_of_biology_support[i,0,1]);
             supscore = 0;
             output_text = output_text + "\nТипы атмосфер: ";
             do
@@ -704,9 +717,354 @@ static public string output(int i)
             return output_text;
         }
 
+        static public string output_low(int i)
+        {
+            string output_text = "Название вида: " + Convert.ToString(info_of_biology_name[i]);
+            output_text = output_text + "\nСтоимость изучения: " + info_of_biology_cost[i, 0].ToString("#,#") + " Кредитов.\nСтоимость первооктрытия: " + (info_of_biology_cost[i, 1]).ToString("#,#") + " Кредитов.\nОбщая стоимость: "
+               + (info_of_biology_cost[i, 0] + info_of_biology_cost[i, 1]).ToString("#,#") + " Кредитов.\n\n";
+            return output_text;
+        }
+
+
         static public bool IsMatched(int i)
         {
             return matching[i];
+        }
+
+        static public bool IsMatchedOfCost(int i, int down_cost)
+        {
+            if (down_cost < info_of_biology_cost[i, 0] + info_of_biology_cost[i, 1])
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        static public void IsMatchedWithFilters (int i, bool f1, bool f2, bool f3, bool f4)
+        {
+            int x1 = 0;
+            int x2 = 0;
+            int x3 = 0;
+            bool succes = false;
+            if (f1 == false)
+            {
+                if (f2 == false)
+                {
+                    if (f3 == false)
+                    {
+                        if (info_of_biology_support[i, 1, 0] > 0 || info_of_biology_support[i, 0, 0] > 0)
+                        {
+                            do
+                            {
+                                if ((info_of_biology_gravity[i, x1, 0] <= gravity && info_of_biology_gravity[i, x1, 1] >= gravity))
+                                {
+                                    matching[i] = true;
+                                }
+                                x1++;
+                            } while (info_of_biology_support[i, 1, 0] > x1 || info_of_biology_support[i, 0, 0] > x1);
+                        }
+                        else
+                        {
+                            if ((info_of_biology_gravity[i, 0, 0] <= gravity && info_of_biology_gravity[i, 0, 1] >= gravity))
+                            {
+                                matching[i] = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (f4 == false)
+                        {
+                            if (info_of_biology_support[i, 1, 0] > 0 || info_of_biology_support[i, 0, 0] > 0)
+                            {
+                                do
+                                {
+                                    if ((info_of_biology_temperature[i, x1, 0] <= temperature && info_of_biology_temperature[i, x1, 1] >= temperature))
+                                    {
+                                        matching[i] = true;
+                                    }
+                                    x1++;
+                                } while (info_of_biology_support[i, 1, 0] > x1 || info_of_biology_support[i, 0, 0] > x1);
+                            }
+                            else
+                            {
+                                if ((info_of_biology_temperature[i, 0, 0] <= temperature && info_of_biology_temperature[i, 0, 1] >= temperature))
+                                {
+                                    matching[i] = true;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            do
+                            {
+                                if ((info_of_biology_temperature[i, x1, 0] <= temperature && info_of_biology_temperature[i, x1, 1] >= temperature))
+                                {
+                                    if ((info_of_biology_gravity[i, x1, 0] <= gravity && info_of_biology_gravity[i, x1, 1] >= gravity))
+                                    {
+                                        matching[i] = true;
+                                    }
+                                }
+                                else if (info_of_biology_support[i, 0, 0] == 0 && info_of_biology_support[i, 1, 0] == 0 && (info_of_biology_temperature[i, 0, 0] <= temperature && info_of_biology_temperature[i, 0, 1] >= temperature) && info_of_biology_gravity[i, 0, 0] <= gravity && info_of_biology_gravity[i, 0, 1] >= gravity)
+                                {
+                                    matching[i] = true;
+                                }
+                                x1++;
+                            } while (info_of_biology_support[i, 1, 0] > x1 || info_of_biology_support[i, 0, 0] > x1);
+                        }
+                    }
+                }
+                else
+                {
+                    do
+                    {
+                        if (atmosphere == info_of_biology_atmosphere[i, x2])
+                        {
+                            if (f3 == false)
+                            {
+                                if (info_of_biology_support[i, 1, 0] > 0 || info_of_biology_support[i, 0, 0] > 0)
+                                {
+                                    do
+                                    {
+                                        if ((info_of_biology_gravity[i, x1, 0] <= gravity && info_of_biology_gravity[i, x1, 1] >= gravity))
+                                        {
+                                            if ((info_of_biology_support[i, 1, 0] > 0 && x2 == x1) || info_of_biology_support[i, 0, 0] > 0)
+                                            {
+                                                matching[i] = true;
+                                            }
+                                        }
+                                        x1++;
+                                    } while (info_of_biology_support[i, 1, 0] > x1 || info_of_biology_support[i, 0, 0] > x1);
+                                }
+                                else
+                                {
+                                    if ((info_of_biology_gravity[i, 0, 0] <= gravity && info_of_biology_gravity[i, 0, 1] >= gravity))
+                                    {
+                                        matching[i] = true;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (f4 == false)
+                                {
+                                    if (info_of_biology_support[i, 1, 0] > 0 || info_of_biology_support[i, 0, 0] > 0)
+                                    {
+                                        do
+                                        {
+                                            if ((info_of_biology_temperature[i, x1, 0] <= temperature && info_of_biology_temperature[i, x1, 1] >= temperature))
+                                            {
+                                                if ((info_of_biology_support[i, 1, 0] > 0 && x2 == x1) || info_of_biology_support[i, 0, 0] > 0)
+                                                {
+                                                    matching[i] = true;
+                                                }
+                                            }
+                                            x1++;
+                                        } while (info_of_biology_support[i, 1, 0] > x1 || info_of_biology_support[i, 0, 0] > x1);
+                                    }
+                                    else
+                                    {
+                                        if ((info_of_biology_temperature[i, 0, 0] <= temperature && info_of_biology_temperature[i, 0, 1] >= temperature))
+                                        {
+                                            matching[i] = true;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    do
+                                    {
+                                        if ((info_of_biology_temperature[i, x1, 0] <= temperature && info_of_biology_temperature[i, x1, 1] >= temperature))
+                                        {
+                                            if ((info_of_biology_gravity[i, x1, 0] <= gravity && info_of_biology_gravity[i, x1, 1] >= gravity))
+                                            {
+                                                if ((info_of_biology_support[i, 1, 0] > 0 && x2 == x1) || info_of_biology_support[i, 0, 0] > 0)
+                                                {
+                                                    matching[i] = true;
+                                                }
+                                            }
+                                        }
+                                        else if (info_of_biology_support[i, 0, 0] == 0 && info_of_biology_support[i, 1, 0] == 0 && (info_of_biology_temperature[i, 0, 0] <= temperature && info_of_biology_temperature[i, 0, 1] >= temperature) && info_of_biology_gravity[i, 0, 0] <= gravity && info_of_biology_gravity[i, 0, 1] >= gravity)
+                                        {
+                                            matching[i] = true;
+                                        }
+                                        x1++;
+                                    } while (info_of_biology_support[i, 1, 0] > x1 || info_of_biology_support[i, 0, 0] > x1);
+                                }
+                            }
+                        }
+                        x2++;
+                    } while (x2 < info_of_biology_support[i, 1, 1]);
+                }
+            }
+            else
+            {
+                do
+                {
+                    if (type_of_planet == info_of_biology_type_of_planet[i, x3])
+                    {
+                        if (f2 == false)
+                        {
+                            if (f3 == false)
+                            {
+                                if (info_of_biology_support[i, 1, 0] > 0 || info_of_biology_support[i, 0, 0] > 0)
+                                {
+                                    do
+                                    {
+                                        if ((info_of_biology_gravity[i, x1, 0] <= gravity && info_of_biology_gravity[i, x1, 1] >= gravity))
+                                        {
+                                            if ((info_of_biology_support[i, 0, 0] > 0 && x3 == x1) || info_of_biology_support[i, 1, 0] > 0)
+                                            {
+                                                matching[i] = true;
+                                            }
+                                        }
+                                        x1++;
+                                    } while (info_of_biology_support[i, 1, 0] > x1 || info_of_biology_support[i, 0, 0] > x1);
+                                }
+                                else
+                                {
+                                    if ((info_of_biology_gravity[i, 0, 0] <= gravity && info_of_biology_gravity[i, 0, 1] >= gravity))
+                                    {
+                                        matching[i] = true;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (f4 == false)
+                                {
+                                    if (info_of_biology_support[i, 1, 0] > 0 || info_of_biology_support[i, 0, 0] > 0)
+                                    {
+                                        do
+                                        {
+                                            if ((info_of_biology_temperature[i, x1, 0] <= temperature && info_of_biology_temperature[i, x1, 1] >= temperature))
+                                            {
+                                                if ((info_of_biology_support[i, 0, 0] > 0 && x3 == x1) || info_of_biology_support[i, 1, 0] > 0)
+                                                {
+                                                    matching[i] = true;
+                                                }
+                                            }
+                                            x1++;
+                                        } while (info_of_biology_support[i, 1, 0] > x1 || info_of_biology_support[i, 0, 0] > x1);
+                                    }
+                                    else
+                                    {
+                                        if ((info_of_biology_temperature[i, 0, 0] <= temperature && info_of_biology_temperature[i, 0, 1] >= temperature))
+                                        {
+                                            matching[i] = true;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    do
+                                    {
+                                        if ((info_of_biology_temperature[i, x1, 0] <= temperature && info_of_biology_temperature[i, x1, 1] >= temperature))
+                                        {
+                                            if ((info_of_biology_gravity[i, x1, 0] <= gravity && info_of_biology_gravity[i, x1, 1] >= gravity))
+                                            {
+                                                if ((info_of_biology_support[i, 0, 0] > 0 && x3 == x1) || info_of_biology_support[i, 1, 0] > 0)
+                                                {
+                                                    matching[i] = true;
+                                                }
+                                            }
+                                        }
+                                        else if (info_of_biology_support[i, 0, 0] == 0 && info_of_biology_support[i, 1, 0] == 0 && (info_of_biology_temperature[i, 0, 0] <= temperature && info_of_biology_temperature[i, 0, 1] >= temperature) && info_of_biology_gravity[i, 0, 0] <= gravity && info_of_biology_gravity[i, 0, 1] >= gravity)
+                                        {
+                                            matching[i] = true;
+                                        }
+                                        x1++;
+                                    } while (info_of_biology_support[i, 1, 0] > x1 || info_of_biology_support[i, 0, 0] > x1);
+                                }
+                            }
+                        }
+                        // Отсюда идёт тип атмосферы
+                        else
+                        {
+                            do
+                            {
+                                if (atmosphere == info_of_biology_atmosphere[i, x2])
+                                {
+                                    if (f3 == false)
+                                    {
+                                        if (info_of_biology_support[i, 1, 0] > 0 || info_of_biology_support[i, 0, 0] > 0)
+                                        {
+                                            do
+                                            {
+                                                if ((info_of_biology_gravity[i, x1, 0] <= gravity && info_of_biology_gravity[i, x1, 1] >= gravity))
+                                                {
+                                                    if ((info_of_biology_support[i, 1, 0] > 0 && x2 == x1) || (info_of_biology_support[i, 0, 0] > 0 && x3 == x1))
+                                                    {
+                                                        matching[i] = true;
+                                                    }
+                                                }
+                                                x1++;
+                                            } while (info_of_biology_support[i, 1, 0] > x1 || info_of_biology_support[i, 0, 0] > x1);
+                                        }
+                                        else
+                                        {
+                                            if ((info_of_biology_gravity[i, 0, 0] <= gravity && info_of_biology_gravity[i, 0, 1] >= gravity))
+                                            {
+                                                matching[i] = true;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (f4 == false)
+                                        {
+                                            if (info_of_biology_support[i, 1, 0] > 0 || info_of_biology_support[i, 0, 0] > 0)
+                                            {
+                                                do
+                                                {
+                                                    if ((info_of_biology_temperature[i, x1, 0] <= temperature && info_of_biology_temperature[i, x1, 1] >= temperature))
+                                                    {
+                                                        if ((info_of_biology_support[i, 1, 0] > 0 && x2 == x1) || (info_of_biology_support[i, 0, 0] > 0 && x3 == x1))
+                                                        {
+                                                            matching[i] = true;
+                                                        }
+                                                    }
+                                                    x1++;
+                                                } while (info_of_biology_support[i, 1, 0] > x1 || info_of_biology_support[i, 0, 0] > x1);
+                                            }
+                                            else
+                                            {
+                                                if ((info_of_biology_temperature[i, 0, 0] <= temperature && info_of_biology_temperature[i, 0, 1] >= temperature))
+                                                {
+                                                    matching[i] = true;
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            do
+                                            {
+                                                if ((info_of_biology_temperature[i, x1, 0] <= temperature && info_of_biology_temperature[i, x1, 1] >= temperature))
+                                                {
+                                                    if ((info_of_biology_gravity[i, x1, 0] <= gravity && info_of_biology_gravity[i, x1, 1] >= gravity))
+                                                    {
+                                                        if ((info_of_biology_support[i, 1, 0] > 0 && x2 == x1) || (info_of_biology_support[i, 0, 0] > 0 && x3 == x1))
+                                                        {
+                                                            matching[i] = true;
+                                                        }
+                                                    }
+                                                }
+                                                else if (info_of_biology_support[i, 0, 0] == 0 && info_of_biology_support[i, 1, 0] == 0 && (info_of_biology_temperature[i, 0, 0] <= temperature && info_of_biology_temperature[i, 0, 1] >= temperature) && info_of_biology_gravity[i, 0, 0] <= gravity && info_of_biology_gravity[i, 0, 1] >= gravity)
+                                                {
+                                                    matching[i] = true;
+                                                }
+                                                x1++;
+                                            } while (info_of_biology_support[i, 1, 0] > x1 || info_of_biology_support[i, 0, 0] > x1);
+                                        }
+                                    }
+                                }
+                                x2++;
+                            } while (x2 < info_of_biology_support[i, 1, 1]);
+                        }
+                    }
+                    x3++;
+                } while (x3 < info_of_biology_support[i, 0, 1]);
+            }
         }
 
         /// <summary>
