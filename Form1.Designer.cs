@@ -53,6 +53,11 @@
             label6 = new Label();
             label7 = new Label();
             comboBox2 = new ComboBox();
+            panel1 = new Panel();
+            close = new Button();
+            richTextBox1 = new RichTextBox();
+            open = new Button();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // listBox1
@@ -341,12 +346,60 @@
             comboBox2.TabIndex = 0;
             comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.WindowFrame;
+            panel1.BorderStyle = BorderStyle.Fixed3D;
+            panel1.Controls.Add(close);
+            panel1.Controls.Add(richTextBox1);
+            panel1.Location = new Point(-2, -7);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1315, 474);
+            panel1.TabIndex = 27;
+            panel1.Visible = false;
+            // 
+            // close
+            // 
+            close.BackColor = SystemColors.ButtonFace;
+            close.Font = new Font("Times New Roman", 14F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            close.ForeColor = Color.Black;
+            close.Location = new Point(559, 422);
+            close.Name = "close";
+            close.Size = new Size(168, 29);
+            close.TabIndex = 28;
+            close.Text = "Закрыть";
+            close.UseVisualStyleBackColor = false;
+            close.Click += close_Click;
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.Font = new Font("Times New Roman", 14F);
+            richTextBox1.Location = new Point(21, 21);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(1262, 373);
+            richTextBox1.TabIndex = 0;
+            richTextBox1.Text = "";
+            // 
+            // open
+            // 
+            open.BackColor = SystemColors.ButtonFace;
+            open.Font = new Font("Times New Roman", 14F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            open.ForeColor = Color.Black;
+            open.Location = new Point(677, 688);
+            open.Name = "open";
+            open.Size = new Size(168, 29);
+            open.TabIndex = 28;
+            open.Text = "Заметки";
+            open.UseVisualStyleBackColor = false;
+            open.Click += open_Click;
+            // 
             // Form1
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.ControlDarkDark;
             ClientSize = new Size(1308, 729);
+            Controls.Add(panel1);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -372,10 +425,12 @@
             Controls.Add(button);
             Controls.Add(listBox1);
             Controls.Add(comboBox2);
+            Controls.Add(open);
             ForeColor = SystemColors.ControlLightLight;
             Name = "Form1";
             Text = "ED Exobio";
             Load += Form1_Load;
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -409,5 +464,9 @@
         private Label label7;
         private MenuStrip menuStrip1;
         private ComboBox comboBox2;
+        private Panel panel1;
+        private Button close;
+        private RichTextBox richTextBox1;
+        private Button open;
     }
 }

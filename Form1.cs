@@ -10,6 +10,7 @@ namespace ED_Exobio
         private bool checkbox_low_info = false;
         private bool checkbox_cost_IsActive = false;
         private bool checkbox_filtres = false;
+        private bool panel_is_open = false;
         public Form1()
         {
             InitializeComponent();
@@ -54,7 +55,7 @@ namespace ED_Exobio
                     for (int i = 0; i < 125; i++)
                     {
                         Program.process(i);
-                        if (Program.IsMatched(i) == true && Program.IsMatchedOfSector(i)==true)
+                        if (Program.IsMatched(i) == true && Program.IsMatchedOfSector(i) == true)
                         {
                             if (checkbox_cost_IsActive == true && correct[4] == true)
                             {
@@ -363,7 +364,26 @@ namespace ED_Exobio
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Program.get_value_sector(comboBox2.SelectedIndex+1);
+            Program.get_value_sector(comboBox2.SelectedIndex + 1);
+        }
+
+        private void open_Click(object sender, EventArgs e)
+        {
+            if (panel_is_open == false)
+            {
+                panel_is_open = true;
+                panel1.Visible = true;
+            }
+            else
+            {
+                panel_is_open = false;
+                panel1.Visible = false;
+            }
+        }
+
+        private void close_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = false;
         }
     }
 }
