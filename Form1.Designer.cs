@@ -51,6 +51,8 @@
             all_bio = new Button();
             label5 = new Label();
             label6 = new Label();
+            label7 = new Label();
+            comboBox2 = new ComboBox();
             SuspendLayout();
             // 
             // listBox1
@@ -317,12 +319,35 @@
             label6.TabIndex = 25;
             label6.Text = "v. 1.1";
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Times New Roman", 14F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label7.ForeColor = SystemColors.ActiveCaptionText;
+            label7.Location = new Point(17, 621);
+            label7.Name = "label7";
+            label7.Size = new Size(267, 21);
+            label7.TabIndex = 26;
+            label7.Text = "Исследуемый сектор галактики:";
+            // 
+            // comboBox2
+            // 
+            comboBox2.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Items.AddRange(new object[] { "Galactic Centre", "Empyrean Straits", "Ryker's Hope", "Odin's Hold", "Norma Arm", "Arcadian Stream", "Izanami", "Inner Orion-Perseus Conflux", "Inner Scutum-Centaurus Arm", "Norma Expanse", "Trojan Belt", "The Veils", "Newton's Vault", "The Conduit", "Outer Orion-Perseus Conflux", "Orion-Cygnus Arm", "Temple", "Inner Orion Spur", "Hawking's Gap", "Dryman's Point", "Sagittarius-Carina Arm", "Mare Somnia", "Acheron", "Formorian Frontier", "Hieronymus Delta", "Outer Scutum-Centaurus Arm", "Outer Arm", "Aquila's Halo", "Errant Marches", "Perseus Arm", "Formidine Rift", "Vulcan Gate", "Elysian Shore", "Sanguineous Rim", "Outer Orion Spur", "Achilles's Altar", "Xibalba", "Lyra's Song", "Tenebrae", "The Abyss", "Kepler's Crest", "The Void" });
+            comboBox2.Location = new Point(295, 621);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(256, 27);
+            comboBox2.TabIndex = 0;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+            // 
             // Form1
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.ControlDarkDark;
             ClientSize = new Size(1308, 729);
+            Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(all_bio);
@@ -346,6 +371,7 @@
             Controls.Add(temperature);
             Controls.Add(button);
             Controls.Add(listBox1);
+            Controls.Add(comboBox2);
             ForeColor = SystemColors.ControlLightLight;
             Name = "Form1";
             Text = "ED Exobio";
@@ -380,5 +406,8 @@
         private Button all_bio;
         private Label label5;
         private Label label6;
+        private Label label7;
+        private MenuStrip menuStrip1;
+        private ComboBox comboBox2;
     }
 }

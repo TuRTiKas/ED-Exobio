@@ -4,28 +4,34 @@ namespace ED_Exobio
 {
     internal class Program
     {
+        const int value_of_biology = 125;
+
         static private string type_of_planet;
         static private string atmosphere;
         static private double temperature;
         static private double gravity;
+        static private int sector;
 
-        static private string[] info_of_biology_name = new string[125];
+        static private string[] info_of_biology_name = new string[value_of_biology];
 
-        static private string[,] info_of_biology_type_of_planet = new string[125, 10];
+        static private string[,] info_of_biology_type_of_planet = new string[value_of_biology, 10];
 
-        static private string[,] info_of_biology_atmosphere = new string[125, 10];
+        static private string[,] info_of_biology_atmosphere = new string[value_of_biology, 10];
 
-        static private double[,,] info_of_biology_temperature = new double[125, 10, 2];
+        static private double[,,] info_of_biology_temperature = new double[value_of_biology, 10, 2];
 
-        static private double[,,] info_of_biology_gravity = new double[125, 10, 2];
+        static private double[,,] info_of_biology_gravity = new double[value_of_biology, 10, 2];
 
-        static private double[,] info_of_biology_cost = new double[125, 2];
+        static private double[,] info_of_biology_cost = new double[value_of_biology, 2];
 
-        static private int[,,] info_of_biology_support = new int[125, 2, 2];
+        static private int[,,] info_of_biology_support = new int[value_of_biology, 2, 2];
 
-        static private bool[] matching = new bool[125];
+        static private string[] info_of_biology_additional_info = new string[value_of_biology];
 
+        static private bool[] matching = new bool[value_of_biology];
         static public int number_of_biology = 0;
+
+        static public int [,] info_of_biology_sector = new int [value_of_biology,43];
 
         static public void Init()
         {
@@ -57,6 +63,9 @@ namespace ED_Exobio
             //0 - Цена за открытие, 1 - бонус первооткрывателя
             info_of_biology_cost[number_of_biology, 0] = 20000000;
             info_of_biology_cost[number_of_biology, 1] = 80000000;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 500 м";
+            //info_of_biology_sector[number_of_biology, 0] всегда отвечает за количество регионов галактики. Если 0, значит ВСЕ
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             //Пример ввода данных вручную
@@ -108,6 +117,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 1, 1] = 0.275;
             info_of_biology_cost[number_of_biology, 0] = 19010800;
             info_of_biology_cost[number_of_biology, 1] = 76043200;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 200 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Моллюск Biconcavis";
@@ -128,6 +139,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 1, 1] = 0.265;
             info_of_biology_cost[number_of_biology, 0] = 19010800;
             info_of_biology_cost[number_of_biology, 1] = 76043200;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 150 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Стратум Tectonicas";
@@ -178,6 +191,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 7, 1] = 0.512;
             info_of_biology_cost[number_of_biology, 0] = 19010800;
             info_of_biology_cost[number_of_biology, 1] = 76043200;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 500 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Фонтикула Segmentatus";
@@ -194,6 +209,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 0, 1] = 0.275;
             info_of_biology_cost[number_of_biology, 0] = 19010800;
             info_of_biology_cost[number_of_biology, 1] = 76043200;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 500 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Дымник Extremus";
@@ -226,6 +243,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 3, 1] = 0.127;
             info_of_biology_cost[number_of_biology, 0] = 16202800;
             info_of_biology_cost[number_of_biology, 1] = 64811200;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 100 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Кактусоид Vermis";
@@ -247,6 +266,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 1, 1] = 0.275;
             info_of_biology_cost[number_of_biology, 0] = 16202800;
             info_of_biology_cost[number_of_biology, 1] = 64811200;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 300 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Клипеус Speculumi";
@@ -267,6 +288,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 1, 1] = 0.054;
             info_of_biology_cost[number_of_biology, 0] = 16202800;
             info_of_biology_cost[number_of_biology, 1] = 64811200;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 150 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Рецептоид Deltahedronix";
@@ -298,6 +321,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 3, 1] = 0.275;
             info_of_biology_cost[number_of_biology, 0] = 16202800;
             info_of_biology_cost[number_of_biology, 1] = 64811200;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 150 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Стратум Cucumisis";
@@ -328,6 +353,18 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 3, 1] = 0.451;
             info_of_biology_cost[number_of_biology, 0] = 16202800;
             info_of_biology_cost[number_of_biology, 1] = 64811200;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 500 м";
+            info_of_biology_sector[number_of_biology, 0] = 10;
+            info_of_biology_sector[number_of_biology, 1] = 1;
+            info_of_biology_sector[number_of_biology, 2] = 4;
+            info_of_biology_sector[number_of_biology, 3] = 9;
+            info_of_biology_sector[number_of_biology, 4] = 18;
+            info_of_biology_sector[number_of_biology, 5] = 19;
+            info_of_biology_sector[number_of_biology, 6] = 20;
+            info_of_biology_sector[number_of_biology, 7] = 21;
+            info_of_biology_sector[number_of_biology, 8] = 22;
+            info_of_biology_sector[number_of_biology, 9] = 23;
+            info_of_biology_sector[number_of_biology, 10] = 40;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Дерновина Virgam";
@@ -348,6 +385,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 1, 1] = 0.063;
             info_of_biology_cost[number_of_biology, 0] = 14313700;
             info_of_biology_cost[number_of_biology, 1] = 57254800;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 200 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Рецептоид Conditivus";
@@ -380,6 +419,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 3, 1] = 0.274;
             info_of_biology_cost[number_of_biology, 0] = 14313700;
             info_of_biology_cost[number_of_biology, 1] = 57254800;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 150 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Алеоид Gravis";
@@ -400,6 +441,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 1, 1] = 0.271;
             info_of_biology_cost[number_of_biology, 0] = 12934900;
             info_of_biology_cost[number_of_biology, 1] = 51739600;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 150 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Оссия Discus";
@@ -432,6 +475,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 3, 1] = 0.127;
             info_of_biology_cost[number_of_biology, 0] = 12934900;
             info_of_biology_cost[number_of_biology, 1] = 51739600;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 800 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Рецепотид Umbrux";
@@ -464,6 +509,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 3, 1] = 0.275;
             info_of_biology_cost[number_of_biology, 0] = 12934900;
             info_of_biology_cost[number_of_biology, 1] = 51739600;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 150 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Клипеус Margaritus";
@@ -484,6 +531,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 1, 1] = 0.063;
             info_of_biology_cost[number_of_biology, 0] = 11873200;
             info_of_biology_cost[number_of_biology, 1] = 47492800;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 150 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Тубус Cavas";
@@ -499,6 +548,19 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 0, 1] = 0.151;
             info_of_biology_cost[number_of_biology, 0] = 11873200;
             info_of_biology_cost[number_of_biology, 1] = 47492800;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 800 м";
+            info_of_biology_sector[number_of_biology, 0] = 11;
+            info_of_biology_sector[number_of_biology, 1] = 1;
+            info_of_biology_sector[number_of_biology, 2] = 4;
+            info_of_biology_sector[number_of_biology, 3] = 9;
+            info_of_biology_sector[number_of_biology, 4] = 10;
+            info_of_biology_sector[number_of_biology, 5] = 11;
+            info_of_biology_sector[number_of_biology, 6] = 12;
+            info_of_biology_sector[number_of_biology, 7] = 24;
+            info_of_biology_sector[number_of_biology, 8] = 25;
+            info_of_biology_sector[number_of_biology, 9] = 26;
+            info_of_biology_sector[number_of_biology, 10] = 28;
+            info_of_biology_sector[number_of_biology, 11] = 42;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Кустарник Flammasis";
@@ -514,6 +576,19 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 0, 1] = 0.275;
             info_of_biology_cost[number_of_biology, 0] = 10326000;
             info_of_biology_cost[number_of_biology, 1] = 41304000;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 150 м";
+            info_of_biology_sector[number_of_biology, 0] = 11;
+            info_of_biology_sector[number_of_biology, 1] = 1;
+            info_of_biology_sector[number_of_biology, 2] = 4;
+            info_of_biology_sector[number_of_biology, 3] = 9;
+            info_of_biology_sector[number_of_biology, 4] = 10;
+            info_of_biology_sector[number_of_biology, 5] = 11;
+            info_of_biology_sector[number_of_biology, 6] = 12;
+            info_of_biology_sector[number_of_biology, 7] = 24;
+            info_of_biology_sector[number_of_biology, 8] = 25;
+            info_of_biology_sector[number_of_biology, 9] = 26;
+            info_of_biology_sector[number_of_biology, 10] = 28;
+            info_of_biology_sector[number_of_biology, 11] = 42;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Оссия Pellebantus";
@@ -534,6 +609,39 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 1, 1] = 0.27;
             info_of_biology_cost[number_of_biology, 0] = 9739000;
             info_of_biology_cost[number_of_biology, 1] = 38956000;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 800 м";
+            info_of_biology_sector[number_of_biology, 0] = 30;
+            info_of_biology_sector[number_of_biology, 1] = 2;
+            info_of_biology_sector[number_of_biology, 2] = 4;
+            info_of_biology_sector[number_of_biology, 3] = 5;
+            info_of_biology_sector[number_of_biology, 4] = 6;
+            info_of_biology_sector[number_of_biology, 5] = 8;
+            info_of_biology_sector[number_of_biology, 6] = 9;
+            info_of_biology_sector[number_of_biology, 7] = 10;
+            info_of_biology_sector[number_of_biology, 8] = 11;
+            info_of_biology_sector[number_of_biology, 9] = 12;
+            info_of_biology_sector[number_of_biology, 10] = 13;
+            info_of_biology_sector[number_of_biology, 11] = 14;
+            info_of_biology_sector[number_of_biology, 12] = 16;
+            info_of_biology_sector[number_of_biology, 13] = 17;
+            info_of_biology_sector[number_of_biology, 14] = 18;
+            info_of_biology_sector[number_of_biology, 15] = 19;
+            info_of_biology_sector[number_of_biology, 16] = 20;
+            info_of_biology_sector[number_of_biology, 17] = 21;
+            info_of_biology_sector[number_of_biology, 18] = 22;
+            info_of_biology_sector[number_of_biology, 19] = 23;
+            info_of_biology_sector[number_of_biology, 20] = 24;
+            info_of_biology_sector[number_of_biology, 21] = 25;
+            info_of_biology_sector[number_of_biology, 22] = 26;
+            info_of_biology_sector[number_of_biology, 23] = 27;
+            info_of_biology_sector[number_of_biology, 24] = 28;
+            info_of_biology_sector[number_of_biology, 25] = 29;
+            info_of_biology_sector[number_of_biology, 26] = 31;
+            info_of_biology_sector[number_of_biology, 27] = 35;
+            info_of_biology_sector[number_of_biology, 28] = 37;
+            info_of_biology_sector[number_of_biology, 29] = 40;
+            info_of_biology_sector[number_of_biology, 30] = 41;
+            info_of_biology_sector[number_of_biology, 31] = 42;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Бактерия Informem";
@@ -564,6 +672,8 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 3, 1] = 0.591;
             info_of_biology_cost[number_of_biology, 0] = 8418000;
             info_of_biology_cost[number_of_biology, 1] = 33672000;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 500 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
 
             info_of_biology_name[number_of_biology] = "Клипеус Lacrimam";
@@ -584,7 +694,64 @@ namespace ED_Exobio
             info_of_biology_gravity[number_of_biology, 1, 1] = 0.055;
             info_of_biology_cost[number_of_biology, 0] = 8418000;
             info_of_biology_cost[number_of_biology, 1] = 33672000;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 150 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
             number_of_biology++;
+
+            info_of_biology_name[number_of_biology] = "Бактерия Volu";
+            info_of_biology_support[number_of_biology, 0, 0] = 4;
+            info_of_biology_support[number_of_biology, 1, 0] = 0;
+            info_of_biology_support[number_of_biology, 0, 1] = 4;
+            info_of_biology_support[number_of_biology, 1, 1] = 1;
+            info_of_biology_type_of_planet[number_of_biology, 0] = "Каменисто-ледяной мир";
+            info_of_biology_type_of_planet[number_of_biology, 1] = "Каменистый мир";
+            info_of_biology_type_of_planet[number_of_biology, 2] = "Ледяной мир";
+            info_of_biology_type_of_planet[number_of_biology, 3] = "Мир с высоким содержанием металлов";
+            info_of_biology_atmosphere[number_of_biology, 0] = "Кислород";
+            info_of_biology_temperature[number_of_biology, 0, 0] = 153.4;
+            info_of_biology_temperature[number_of_biology, 0, 1] = 227.2;
+            info_of_biology_temperature[number_of_biology, 1, 0] = 155.5;
+            info_of_biology_temperature[number_of_biology, 1, 1] = 244;
+            info_of_biology_temperature[number_of_biology, 2, 0] = 144.9;
+            info_of_biology_temperature[number_of_biology, 2, 1] = 235.2;
+            info_of_biology_temperature[number_of_biology, 3, 0] = 156;
+            info_of_biology_temperature[number_of_biology, 3, 1] = 245.1;
+            info_of_biology_gravity[number_of_biology, 0, 0] = 0.298;
+            info_of_biology_gravity[number_of_biology, 0, 1] = 0.454;
+            info_of_biology_gravity[number_of_biology, 1, 0] = 0.394;
+            info_of_biology_gravity[number_of_biology, 1, 1] = 0.46;
+            info_of_biology_gravity[number_of_biology, 2, 0] = 0.24;
+            info_of_biology_gravity[number_of_biology, 2, 1] = 0.421;
+            info_of_biology_gravity[number_of_biology, 3, 0] = 0.401;
+            info_of_biology_gravity[number_of_biology, 3, 1] = 0.512;
+            info_of_biology_cost[number_of_biology, 0] = 7774700;
+            info_of_biology_cost[number_of_biology, 1] = 31098800;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 500 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
+            number_of_biology++;
+
+            info_of_biology_name[number_of_biology] = "Дерновина Triticum";
+            info_of_biology_support[number_of_biology, 0, 0] = 2;
+            info_of_biology_support[number_of_biology, 1, 0] = 0;
+            info_of_biology_support[number_of_biology, 0, 1] = 2;
+            info_of_biology_support[number_of_biology, 1, 1] = 1;
+            info_of_biology_type_of_planet[number_of_biology, 0] = "Каменистый мир";
+            info_of_biology_type_of_planet[number_of_biology, 1] = "Мир с высоким содержанием металлов";
+            info_of_biology_atmosphere[number_of_biology, 0] = "Диоксид углерода";
+            info_of_biology_temperature[number_of_biology, 0, 0] = 191;
+            info_of_biology_temperature[number_of_biology, 0, 1] = 195.4;
+            info_of_biology_temperature[number_of_biology, 1, 0] = 191;
+            info_of_biology_temperature[number_of_biology, 1, 1] = 195.4;
+            info_of_biology_gravity[number_of_biology, 0, 0] = 0.042;
+            info_of_biology_gravity[number_of_biology, 0, 1] = 0.236;
+            info_of_biology_gravity[number_of_biology, 1, 0] = 0.208;
+            info_of_biology_gravity[number_of_biology, 1, 1] = 0.271;
+            info_of_biology_cost[number_of_biology, 0] = 7774700;
+            info_of_biology_cost[number_of_biology, 1] = 31098800;
+            info_of_biology_additional_info[number_of_biology] = "Протяжённость колонии: 200 м";
+            info_of_biology_sector[number_of_biology, 0] = 0;
+            number_of_biology++;
+
 
         }
 
@@ -614,6 +781,11 @@ namespace ED_Exobio
         static public void get_value_gravity(double grav)
         {
             gravity = grav;
+        }
+
+        static public void get_value_sector(int sect)
+        {
+            sector = sect;
         }
 
         static public void new_search()
@@ -656,7 +828,7 @@ namespace ED_Exobio
             } while (x1 < info_of_biology_support[i, 0, 1]);
         }
 
-static public string output(int i)
+        static public string output(int i)
         {
             string output_text = "Название вида: " + Convert.ToString(info_of_biology_name[i]);
             int supscore = 0;
@@ -711,9 +883,8 @@ static public string output(int i)
                 output_text = output_text + "\nГравитация: ";
                 output_text = output_text + "\n" + info_of_biology_gravity[i, 0, 0] + "..." + info_of_biology_gravity[i, 0, 1] + "G";
             }
-            // Convert.ToString(info_of_biology_cost[i, 0])
             output_text = output_text + "\nСтоимость изучения: " + info_of_biology_cost[i, 0].ToString("#,#") + " Кредитов.\nСтоимость первооктрытия: " + (info_of_biology_cost[i, 1]).ToString("#,#") + " Кредитов.\nОбщая стоимость: "
-                + (info_of_biology_cost[i, 0] + info_of_biology_cost[i, 1]).ToString("#,#") + " Кредитов.\n\n";
+                + (info_of_biology_cost[i, 0] + info_of_biology_cost[i, 1]).ToString("#,#") + " Кредитов.\n" + info_of_biology_additional_info[i] + "\n\n";
             return output_text;
         }
 
@@ -721,10 +892,43 @@ static public string output(int i)
         {
             string output_text = "Название вида: " + Convert.ToString(info_of_biology_name[i]);
             output_text = output_text + "\nСтоимость изучения: " + info_of_biology_cost[i, 0].ToString("#,#") + " Кредитов.\nСтоимость первооктрытия: " + (info_of_biology_cost[i, 1]).ToString("#,#") + " Кредитов.\nОбщая стоимость: "
-               + (info_of_biology_cost[i, 0] + info_of_biology_cost[i, 1]).ToString("#,#") + " Кредитов.\n\n";
+               + (info_of_biology_cost[i, 0] + info_of_biology_cost[i, 1]).ToString("#,#") + " Кредитов.\n" + info_of_biology_additional_info[i] + "\n\n";
             return output_text;
         }
 
+
+        static public bool IsMatchedOfSector(int i)
+        {
+            if (sector == -1)
+            {
+                return true; 
+            }
+            bool succes = false;
+            if (info_of_biology_sector[i, 0] == 0)
+            {
+                return true;
+            }
+            else
+            {
+                int x1 = 0;
+                do
+                {
+                    if (info_of_biology_sector[i, x1+1]==sector)
+                    {
+                        succes = true;
+                    }
+                    x1++;
+                } while (x1 < info_of_biology_sector[i, 0] && succes==false);
+            }
+            if (succes==true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         static public bool IsMatched(int i)
         {

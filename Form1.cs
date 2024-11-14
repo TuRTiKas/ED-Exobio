@@ -35,6 +35,7 @@ namespace ED_Exobio
             filter_type_of_atmosphere.Visible = false;
             filter_temperature.Visible = false;
             filter_gravity.Visible = false;
+            Program.get_value_sector(-1);
             Program.Init();
             listBox1.Items.Add("Инициализация прошла успешно");
         }
@@ -53,7 +54,7 @@ namespace ED_Exobio
                     for (int i = 0; i < 125; i++)
                     {
                         Program.process(i);
-                        if (Program.IsMatched(i) == true)
+                        if (Program.IsMatched(i) == true && Program.IsMatchedOfSector(i)==true)
                         {
                             if (checkbox_cost_IsActive == true && correct[4] == true)
                             {
@@ -135,7 +136,7 @@ namespace ED_Exobio
                     for (int i = 0; i < 125; i++)
                     {
                         Program.IsMatchedWithFilters(i, filter_IsOn[0], filter_IsOn[1], filter_IsOn[2], filter_IsOn[3]);
-                        if (Program.IsMatched(i) == true)
+                        if (Program.IsMatched(i) == true && Program.IsMatchedOfSector(i) == true)
                         {
                             if (checkbox_cost_IsActive == true && correct[4] == true)
                             {
@@ -358,6 +359,11 @@ namespace ED_Exobio
                     foreach (string s in Regex.Split(Program.output_low(i), "\n")) listBox1.Items.Add(s);
                 }
             }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Program.get_value_sector(comboBox2.SelectedIndex+1);
         }
     }
 }
